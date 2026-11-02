@@ -1,0 +1,64 @@
+{
+  "buttonTemplates": [
+    {
+      "label": "+ Přidat Hráče",
+      "hidden": true,
+      "class": "callButton",
+      "tooltip": "Průvodce tvorbou postavy",
+      "id": "pc",
+      "style": "primary",
+      "actions": [
+        {
+          "type": "command",
+          "command": "cpr-character-sheet:new-character"
+        }
+      ],
+      "icon": ""
+    },
+    {
+      "label": "+ Přidat NPC",
+      "hidden": true,
+      "class": "callButton",
+      "tooltip": "",
+      "id": "npc",
+      "style": "default",
+      "actions": [
+        {
+          "type": "command",
+          "command": "cpr-character-sheet:homebrew-npc"
+        }
+      ],
+      "icon": ""
+    },
+    {
+      "label": "+ Přidat Nepřítele",
+      "hidden": true,
+      "class": "callButton",
+      "tooltip": "",
+      "id": "enemy",
+      "style": "default",
+      "actions": [
+        {
+          "type": "command",
+          "command": "cpr-character-sheet:homebrew-enemy"
+        }
+      ],
+      "icon": ""
+    },
+    {
+      "label": "+ Přidat Předmět",
+      "hidden": true,
+      "class": "callButton",
+      "tooltip": "",
+      "id": "item",
+      "style": "default",
+      "actions": [
+        {
+          "type": "command",
+          "command": "cpr-character-sheet:homebrew-item"
+        }
+      ],
+      "icon": ""
+    }
+  ]
+}

@@ -1,0 +1,297 @@
+{
+  "name": "CPR Character",
+  "id": "7c814468f6c2",
+  "cssProperties": {
+    "primaryColor": "#ff2a3d",
+    "ruleColor": "#ff2a3d",
+    "backgroundColor": "#0e1014",
+    "borderSize": "0px",
+    "borderColor": "#ff2a3d",
+    "barColor": "#f5e000",
+    "barBorderSize": "0px",
+    "barBorderColor": "#000",
+    "boxShadowColor": "rgba(255,42,61,0.25)",
+    "boxShadowXOffset": "0",
+    "boxShadowYOffset": "0",
+    "boxShadowBlur": "18px",
+    "fontColor": "#e6e8ec",
+    "fontWeight": "500",
+    "contentFont": "\"Rajdhani\", \"Bahnschrift\", \"Segoe UI\", sans-serif",
+    "contentFontSize": "15px",
+    "headingFont": "\"Chakra Petch\", \"Bahnschrift\", \"Segoe UI\", sans-serif",
+    "headingFontColor": "#ffffff",
+    "headingFontSize": "26px",
+    "headingFontVariant": "normal",
+    "headingFontWeight": "700",
+    "propertyNameFontColor": "#19e3f0",
+    "propertyNameFontWeight": "700",
+    "propertyFontColor": "#e6e8ec",
+    "sectionHeadingBorderSize": "2px",
+    "sectionHeadingBorderColor": "#ff2a3d",
+    "sectionHeadingFont": "\"Chakra Petch\", sans-serif",
+    "sectionHeadingFontColor": "#ff2a3d",
+    "sectionHeadingFontSize": "17px",
+    "sectionHeadingFontVariant": "normal",
+    "sectionHeadingFontWeight": "700",
+    "subheadingFont": "\"Share Tech Mono\", Consolas, monospace",
+    "subheadingFontColor": "#f5e000",
+    "subheadingFontSize": "13px",
+    "subheadingFontStyle": "normal",
+    "subheadingFontWeight": "400",
+    "traitsNameFontColor": "#19e3f0",
+    "traitsNameFontWeight": "700",
+    "traitsNameFontStyle": "normal",
+    "traitsFontColor": "#e6e8ec",
+    "imageBorderColor": "#ff2a3d",
+    "imageBorderSize": "2px",
+    "imageWidth": "90px",
+    "imageHeight": "90px"
+  },
+  "blocks": [
+    {
+      "type": "heading",
+      "id": "3c54fd5a7db0",
+      "properties": [
+        "name"
+      ],
+      "size": 1,
+      "conditioned": false,
+      "fallback": "Unknown"
+    },
+    {
+      "type": "subheading",
+      "id": "9ffaaf2ba224",
+      "properties": [
+        "threat",
+        "role"
+      ],
+      "separator": "  //  ",
+      "conditioned": true,
+      "fallback": "-"
+    },
+    {
+      "type": "image",
+      "id": "c1c90a5c89ca",
+      "properties": [
+        "image"
+      ],
+      "conditioned": true,
+      "fallback": "-"
+    },
+    {
+      "type": "property",
+      "id": "8ce106098e50",
+      "properties": [
+        "desc"
+      ],
+      "display": "",
+      "conditioned": true,
+      "fallback": "-",
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "table",
+      "id": "3a80c26a7b80",
+      "properties": [
+        "stats"
+      ],
+      "headers": [
+        "INT",
+        "REF",
+        "DEX",
+        "TECH",
+        "COOL",
+        "WILL",
+        "LUCK",
+        "MOVE",
+        "BODY",
+        "EMP"
+      ],
+      "calculate": false,
+      "conditioned": false,
+      "fallback": "-",
+      "hasRule": true
+    },
+    {
+      "type": "inline",
+      "id": "bcbc7f049be2",
+      "properties": [],
+      "nested": [
+        {
+          "type": "property",
+          "id": "05f9bd49aca2",
+          "properties": [
+            "hp"
+          ],
+          "display": "HP",
+          "conditioned": false,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false,
+          "callback": "const s = Array.isArray(monster.stats) ? monster.stats : []; const will = Number(s[5]) || 0; const body = Number(s[8]) || 0; const hp = monster.hp != null && monster.hp !== '' ? Number(monster.hp) : 10 + 5 * Math.ceil((body + will) / 2); return String(hp);"
+        },
+        {
+          "type": "property",
+          "id": "5b5f84d54346",
+          "properties": [
+            "seriously_wounded"
+          ],
+          "display": "Seriously Wounded",
+          "conditioned": false,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false,
+          "callback": "const s = Array.isArray(monster.stats) ? monster.stats : []; const will = Number(s[5]) || 0; const body = Number(s[8]) || 0; const hp = monster.hp != null && monster.hp !== '' ? Number(monster.hp) : 10 + 5 * Math.ceil((body + will) / 2); return String(Math.ceil(hp / 2));"
+        },
+        {
+          "type": "property",
+          "id": "1a40266d79af",
+          "properties": [
+            "death_save"
+          ],
+          "display": "Death Save",
+          "conditioned": false,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false,
+          "callback": "const s = Array.isArray(monster.stats) ? monster.stats : []; const will = Number(s[5]) || 0; const body = Number(s[8]) || 0; return String(monster.death_save != null && monster.death_save !== '' ? monster.death_save : body);"
+        }
+      ],
+      "cls": "cpr-vitals",
+      "conditioned": false
+    },
+    {
+      "type": "inline",
+      "id": "b70c09611d1e",
+      "properties": [],
+      "nested": [
+        {
+          "type": "property",
+          "id": "e6ed9c566821",
+          "properties": [
+            "sp_head"
+          ],
+          "display": "Head SP",
+          "conditioned": true,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false
+        },
+        {
+          "type": "property",
+          "id": "7d36435044a3",
+          "properties": [
+            "sp_body"
+          ],
+          "display": "Body SP",
+          "conditioned": true,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false
+        },
+        {
+          "type": "property",
+          "id": "fa9d098169a4",
+          "properties": [
+            "initiative"
+          ],
+          "display": "Initiative",
+          "conditioned": true,
+          "fallback": "-",
+          "markdown": false,
+          "dice": false
+        }
+      ],
+      "cls": "cpr-armor",
+      "conditioned": false
+    },
+    {
+      "type": "traits",
+      "id": "e017f6649211",
+      "properties": [
+        "weapons"
+      ],
+      "heading": "Weapons",
+      "conditioned": true,
+      "fallback": "-",
+      "hasRule": true,
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "property",
+      "id": "756d447ad3ff",
+      "properties": [
+        "skills"
+      ],
+      "display": "Skills",
+      "conditioned": true,
+      "fallback": "-",
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "traits",
+      "id": "7c60c1cd7e8c",
+      "properties": [
+        "cyberware"
+      ],
+      "heading": "Cyberware",
+      "conditioned": true,
+      "fallback": "-",
+      "hasRule": true,
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "property",
+      "id": "02ffe7e9c4e5",
+      "properties": [
+        "gear"
+      ],
+      "display": "Gear",
+      "conditioned": true,
+      "fallback": "-",
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "traits",
+      "id": "d8497a63dec0",
+      "properties": [
+        "abilities"
+      ],
+      "heading": "Special Abilities",
+      "conditioned": true,
+      "fallback": "-",
+      "hasRule": true,
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "property",
+      "id": "df55b144d9a9",
+      "properties": [
+        "tactics"
+      ],
+      "display": "Tactics",
+      "conditioned": true,
+      "fallback": "-",
+      "markdown": true,
+      "dice": false
+    },
+    {
+      "type": "property",
+      "id": "dd0ae7894b0e",
+      "properties": [
+        "loot"
+      ],
+      "display": "Loot",
+      "conditioned": true,
+      "fallback": "-",
+      "markdown": true,
+      "dice": false
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": "cpr-character-sheet",
+  "name": "Edgerunner Character Sheet",
+  "version": "1.0.0",
+  "minAppVersion": "1.4.0",
+  "description": "Unofficial interactive character sheet for the Cyberpunk RED tabletop RPG: STATs, skills with d10 rolls, HP and wounds, armor ablation, weapons, cyberware, lifepath, IP upgrades, phone layout.",
+  "author": "Marek Meissner",
+  "isDesktopOnly": false
+}

@@ -1,0 +1,9 @@
+{
+  "system": "cpred",
+  "playersFolder": "2. Hráči",
+  "npcFolder": "5. NPC",
+  "monsterFolder": "3. Nepřátelé",
+  "askPlayerInitiative": true,
+  "openCombatNote": true,
+  "combatNote": "Roll Initiative.md"
+}
