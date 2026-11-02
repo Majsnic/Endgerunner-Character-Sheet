@@ -36,6 +36,7 @@
 ## Quick start (the easiest way)
 
 1. Copy the whole `example-vault` folder somewhere and open it in Obsidian as a vault. Its `.obsidian` folder is hidden on most systems, so copy it too.
+   Then put `main.js`, `manifest.json` and `styles.css` (from the latest **Release**, or the repository root) into `example-vault/.obsidian/plugins/cpr-character-sheet/`.
 2. Turn off Restricted mode and install the plugins listed above.
 3. **Settings → Community plugins** → enable **Edgerunner Character Sheet**.
 4. **Settings → Appearance → CSS snippets** → enable `cyberpunk-red-cards`.
@@ -46,7 +47,8 @@
 
 ## Adding it to an existing vault
 
-- Plugin: copy `plugin/cpr-character-sheet/` to `<vault>/.obsidian/plugins/cpr-character-sheet/`.
+- Plugin: download `main.js`, `manifest.json` and `styles.css` from the latest **Release** into `<vault>/.obsidian/plugins/cpr-character-sheet/`.
+  Alternatively, install it with the **BRAT** plugin: *Add beta plugin* → paste this repository's URL.
 - Snippet: copy `example-vault/.obsidian/snippets/cyberpunk-red-cards.css` to `<vault>/.obsidian/snippets/`.
 - Script: copy `example-vault/0. Kompendium/_scripts/cpr-item-card/` anywhere in the vault. Dataview finds it by the path ending `_scripts/cpr-item-card`.
 - In **Settings → Edgerunner Character Sheet**, set your folders for characters, enemies, NPCs and items.
@@ -63,6 +65,12 @@
 Úvod.md                  home page
 ```
 
+## Releasing a new version
+
+1. Raise `version` in `manifest.json` and add it to `versions.json`.
+2. Commit, then push a tag with the same number, e.g. `git tag 1.0.1 && git push origin 1.0.1`.
+3. The GitHub Action creates the release with `main.js`, `manifest.json` and `styles.css`, plus a build attestation.
+
 ## Using the sheet
 
 - **New character**: the ribbon icon on the left, the *+ Přidat Hráče* button on the home page, or the command *New character (wizard)*. Pick a Role and a method (Streetrat, Edgerunner or Complete Package), roll the Lifepath, STATs, skills, gear and cyberware, then review.
@@ -76,7 +84,17 @@
 
 Your item, condition and enemy notes come from your own book. The policy above doesn't let fans republish stat blocks or rules text, so don't commit those notes to a public fork. The `.gitignore` here ignores the content folders by default except for the examples.
 
+## Privacy & permissions
+
+- **No network access.** The plugin makes no internet requests. The optional CSS snippet loads three free fonts from Google Fonts, and works without them.
+- **Vault access.** The plugin lists the files in your vault (`getFiles`, `getMarkdownFiles`) for these purposes:
+  - showing the portrait picker
+  - showing your item notes in the wizard shop and homebrew forms
+  - finding your characters
+- **Writes.** It only writes to the character note you are using, and to notes you create with its wizard or forms.
+- **Settings and data.** Settings are stored in the plugin's own `data.json`. Character data is stored in the note's properties.
+
 ## License
 
-Code (`main.js`, `styles.css`, `view.js`, CSS snippet, templates) is MIT, see `LICENSE`.
+Code (`main.js`, `styles.css`, `view.js`, CSS snippet, templates) is released under the MIT License, see `LICENSE`. The license covers only the original code in this repository.
 Cyberpunk and Cyberpunk RED are trademarks of CD PROJEKT S.A. and R. Talsorian Games. This license covers none of their material.

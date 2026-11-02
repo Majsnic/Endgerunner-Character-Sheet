@@ -270,6 +270,21 @@ class SheetBlock extends MarkdownRenderChild {
   }
   get editing() { return this.plugin.editing.has(this.sourcePath); }
 
+  // Mark the callouts that contain this block (cpr-has-<kind>) so the CSS can lay out
+  // rows and phone pages without the :has() selector. The block may not be attached yet
+  // when it first renders, so try again on the next frames.
+  tagCallouts() {
+    const tag = () => {
+      let n = this.containerEl.parentElement, found = false;
+      while (n) {
+        if (n.classList && n.classList.contains("callout")) { n.classList.add("cpr-in-sheet", `cpr-has-${this.kind}`); found = true; }
+        n = n.parentElement;
+      }
+      return found || this.containerEl.isConnected;
+    };
+    if (!tag()) { window.setTimeout(tag, 0); window.setTimeout(tag, 250); }
+  }
+
   async update(mutator) {
     const f = this.file;
     if (!f) return;
@@ -290,6 +305,7 @@ class SheetBlock extends MarkdownRenderChild {
     const c = this.containerEl;
     c.empty();
     c.addClass("cpr-block", `cpr-block-${this.kind}`);
+    this.tagCallouts();
     try {
       const fn = this["r_" + this.kind];
       if (fn) fn.call(this, c, fm || {});
@@ -2602,13 +2618,10 @@ module.exports = class CprSheetPlugin extends Plugin {
   }
 
   mobilePageFor(path) {
-    if (this.mobilePages.has(path)) return this.mobilePages.get(path);
-    try { const v = window.localStorage.getItem("cpr-mobile-page:" + path); if (v) return v; } catch (e) { /* ignore */ }
-    return "overview";
+    return this.mobilePages.get(path) || "overview";
   }
   setMobilePage(path, page) {
     this.mobilePages.set(path, page);
-    try { window.localStorage.setItem("cpr-mobile-page:" + path, page); } catch (e) { /* ignore */ }
     const f = this.app.vault.getAbstractFileByPath(path);
     const fm = (f && this.app.metadataCache.getFileCache(f)?.frontmatter) || {};
     this.app.workspace.trigger("cpr-sheet:refresh", path, fm);

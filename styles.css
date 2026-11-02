@@ -54,9 +54,9 @@
 }
 .cpr-sheet .callout[data-callout="cpr-row"] > .callout-content > .callout[data-callout-metadata*="wide"] { flex: 2.4 1 480px; }
 .cpr-sheet .callout[data-callout="cpr-row"] > .callout-content > .callout[data-callout="cpr-side"] { flex: 0 1 280px; }
-.cpr-sheet .callout[data-callout="cpr-row"]:has(> .callout-content > .callout[data-callout="cpr-side"]) > .callout-content > .callout[data-callout="cpr-panel"] { flex: 3 1 560px; }
-.cpr-sheet .callout[data-callout="cpr-row"]:has(.cpr-block-armor) > .callout-content { align-items: flex-start; }
-.cpr-sheet .callout[data-callout="cpr-row"]:has(.cpr-block-armor) > .callout-content > .callout:first-child { flex: 1 1 280px; }
+.cpr-sheet .callout[data-callout="cpr-row"].cpr-has-portrait > .callout-content > .callout[data-callout="cpr-panel"] { flex: 3 1 560px; }
+.cpr-sheet .callout[data-callout="cpr-row"].cpr-has-armor > .callout-content { align-items: flex-start; }
+.cpr-sheet .callout[data-callout="cpr-row"].cpr-has-armor > .callout-content > .callout:first-child { flex: 1 1 280px; }
 
 /* panel = red frame + angled title tab */
 .cpr-sheet .callout[data-callout="cpr-panel"],
@@ -335,7 +335,7 @@
 
 /* condition chips */
 .cpr-chip { display: inline-flex; gap: 6px; align-items: center; }
-.cpr-chip.is-linked .cpr-chip-label { text-decoration: underline dotted; cursor: pointer; }
+.cpr-chip.is-linked .cpr-chip-label { border-bottom: 1px dotted currentColor; cursor: pointer; }
 .cpr-chip-x { opacity: .7; cursor: pointer; padding-left: 4px; border-left: 1px solid rgba(255,255,255,.3); }
 .cpr-chip-x:hover { opacity: 1; color: var(--cpr-yellow); }
 
@@ -451,7 +451,7 @@
 
 
 /* ================= PHONE LAYOUT =================
-   Obsidian on a phone (body.is-phone) or any pane narrower than 600px.
+   Obsidian on a phone (body.is-phone).
    The cpr-mobile block (sticky top bar) sets data-cpr-page on the note view; only that page's blocks show. */
 .cpr-block-mobile { display: none; }
 .cpr-mbar { background: #0b0b0d; border-bottom: 3px solid var(--cpr-red); padding: 8px 10px 0; font-family: var(--cpr-body); }
@@ -466,47 +466,46 @@
 .cpr-mbar-chip { font-family: var(--cpr-mono); font-size: 12px; color: #e6e8ec; background: #1b1e24; padding: 1px 6px; }
 .cpr-mbar .cpr-wound, .cpr-mbar .cpr-chip { font-size: 12px; }
 .cpr-mbar-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; }
-.cpr-mbar-tab { font-family: var(--cpr-head); font-weight: 700; text-transform: uppercase; font-size: 13px !important; height: 34px !important;
-  border-radius: 0 !important; border: none !important; box-shadow: none !important; background: var(--cpr-red-dark) !important; color: #fff !important; padding: 0 !important; }
+.cpr-mbar-tab { font-family: var(--cpr-head); font-weight: 700; text-transform: uppercase; font-size: 13px !important; height: 34px !important; border-radius: 0 !important; border: none !important; box-shadow: none !important; background: var(--cpr-red-dark) !important; color: #fff !important; padding: 0 !important; }
 .cpr-mbar-tab.is-active { background: var(--cpr-yellow) !important; color: #000 !important; }
 body.is-phone [data-cpr-page="overview"] .cpr-block:not(.cpr-block-header, .cpr-block-stats, .cpr-block-vitals, .cpr-block-portrait, .cpr-block-mobile) { display: none !important; }
-body.is-phone [data-cpr-page="overview"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-header, .cpr-block-stats, .cpr-block-vitals, .cpr-block-portrait)) { display: none !important; }
+body.is-phone [data-cpr-page="overview"] .callout[data-callout^="cpr-"]:not(.cpr-has-header):not(.cpr-has-stats):not(.cpr-has-vitals):not(.cpr-has-portrait) { display: none !important; }
 body.is-phone [data-cpr-page="skills"] .cpr-block:not(.cpr-block-skills, .cpr-block-mobile) { display: none !important; }
-body.is-phone [data-cpr-page="skills"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-skills)) { display: none !important; }
+body.is-phone [data-cpr-page="skills"] .callout[data-callout^="cpr-"]:not(.cpr-has-skills) { display: none !important; }
 body.is-phone [data-cpr-page="combat"] .cpr-block:not(.cpr-block-vitals, .cpr-block-armor, .cpr-block-weapons, .cpr-block-log, .cpr-block-mobile) { display: none !important; }
-body.is-phone [data-cpr-page="combat"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-vitals, .cpr-block-armor, .cpr-block-weapons, .cpr-block-log)) { display: none !important; }
+body.is-phone [data-cpr-page="combat"] .callout[data-callout^="cpr-"]:not(.cpr-has-vitals):not(.cpr-has-armor):not(.cpr-has-weapons):not(.cpr-has-log) { display: none !important; }
 body.is-phone [data-cpr-page="dossier"] .cpr-block:not(.cpr-block-tabs, .cpr-block-mobile) { display: none !important; }
-body.is-phone [data-cpr-page="dossier"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-tabs)) { display: none !important; }
+body.is-phone [data-cpr-page="dossier"] .callout[data-callout^="cpr-"]:not(.cpr-has-tabs) { display: none !important; }
 body.is-phone .cpr-sheet .metadata-container,
 body.is-phone .cpr-sheet .inline-title,
-body.is-phone .cpr-sheet .markdown-preview-section > div:has(> h1) { display: none !important; }
+body.is-phone .cpr-sheet .markdown-preview-section > div > h1:first-child { display: none !important; }
 body.is-phone .markdown-preview-view.cpr-sheet,
 body.is-phone .markdown-source-view.cpr-sheet .cm-sizer { padding-left: 8px !important; padding-right: 8px !important; }
-body.is-phone .cpr-block-mobile { display: block !important; position: sticky; top: 0; z-index: 20; margin: 0 -8px 8px; }
+body.is-phone .cpr-block-mobile { display: block; position: sticky; top: 0; z-index: 20; margin: 0 -8px 8px; }
 body.is-phone .cpr-sheet .callout[data-callout^="cpr-"] { margin: 8px 0 !important; }
 body.is-phone .cpr-sheet .callout[data-callout="cpr-panel"] > .callout-title,
 body.is-phone .cpr-sheet .callout[data-callout="cpr-side"] > .callout-title { min-width: 0; }
-body.is-phone .cpr-sheet .callout[data-callout="cpr-row"] > .callout-content > .callout { flex: 1 1 100% !important; }
+body.is-phone .cpr-sheet .callout[data-callout="cpr-row"] > .callout-content > .callout { flex: 1 1 100%; }
 body.is-phone .cpr-header,
 body.is-phone .cpr-vitals,
 body.is-phone .cpr-skill-cols,
-body.is-phone .cpr-lifepath { grid-template-columns: 1fr !important; }
+body.is-phone .cpr-lifepath { grid-template-columns: 1fr; }
 body.is-phone .cpr-header .cpr-field { min-height: 40px; }
 body.is-phone .cpr-big { font-size: 22px !important; }
 body.is-phone .cpr-meta .cpr-field { flex: 1 1 45%; }
 body.is-phone .cpr-header-tools { width: 100%; justify-content: flex-end; }
-body.is-phone .cpr-stats { grid-template-columns: repeat(5, 1fr) !important; gap: 4px !important; }
-body.is-phone .cpr-stat { flex-direction: column !important; align-items: center !important; padding: 2px !important; min-height: 0 !important; }
+body.is-phone .cpr-stats { grid-template-columns: repeat(5, 1fr); gap: 4px; }
+body.is-phone .cpr-stat { flex-direction: column; align-items: center; padding: 2px !important; min-height: 0; }
 body.is-phone .cpr-stat .cpr-label::before { content: none; }
-body.is-phone .cpr-stat .cpr-value { font-size: 24px !important; align-self: center !important; }
+body.is-phone .cpr-stat .cpr-value { font-size: 24px !important; align-self: center; }
 body.is-phone .cpr-luck { flex-wrap: wrap; justify-content: center; }
 body.is-phone .cpr-luck .cpr-of { display: none; }
-body.is-phone .cpr-vitals { gap: 6px !important; }
-body.is-phone .cpr-vital { min-height: 0 !important; flex-direction: row !important; justify-content: space-between; align-items: center; }
+body.is-phone .cpr-vitals { gap: 6px; }
+body.is-phone .cpr-vital { min-height: 0; flex-direction: row; justify-content: space-between; align-items: center; }
 body.is-phone .cpr-vital .cpr-value { font-size: 24px !important; }
-body.is-phone .cpr-portrait { min-height: 0 !important; max-height: 300px !important; }
+body.is-phone .cpr-portrait { min-height: 0; max-height: 300px !important; }
 body.is-phone .cpr-portrait img { max-height: 300px !important; }
-body.is-phone .cpr-damage { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 6px !important; }
+body.is-phone .cpr-damage { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
 body.is-phone .cpr-damage input { grid-column: 1 / -1; height: 40px !important; font-size: 20px !important; width: 100% !important; }
 body.is-phone .cpr-damage button { height: 40px !important; font-size: 13px !important; }
 body.is-phone .cpr-skills th:nth-child(2),
@@ -515,7 +514,7 @@ body.is-phone .cpr-skills td:nth-child(2),
 body.is-phone .cpr-skills td:nth-child(3) { display: none; }
 body.is-phone .cpr-skills td { padding: 6px 8px !important; font-size: 16px; }
 body.is-phone .cpr-skills .cpr-total { font-size: 18px; width: 3em; }
-body.is-phone .cpr-skill-cols { gap: 0 !important; }
+body.is-phone .cpr-skill-cols { gap: 0; }
 body.is-phone .cpr-skill-cols .cpr-skills:nth-child(2) tr:first-child { display: none; }
 body.is-phone .cpr-weapons,
 body.is-phone .cpr-weapons tbody { display: block; background: transparent !important; }
@@ -529,97 +528,22 @@ body.is-phone .cpr-weapons td.cpr-act button { height: 36px !important; font-siz
 body.is-phone .cpr-armor td,
 body.is-phone .cpr-armor th { padding: 6px !important; }
 body.is-phone .cpr-armor .cpr-act button { height: 32px !important; min-width: 36px; }
-body.is-phone .cpr-tabbar { display: grid !important; grid-template-columns: repeat(3, 1fr); }
-body.is-phone .cpr-tab { padding: 6px 8px !important; font-size: 13px !important; clip-path: none !important; }
-body.is-phone .cpr-cards { grid-template-columns: 1fr !important; }
+body.is-phone .cpr-tabbar { display: grid; grid-template-columns: repeat(3, 1fr); }
+body.is-phone .cpr-tab { padding: 6px 8px !important; font-size: 13px !important; clip-path: none; }
+body.is-phone .cpr-cards { grid-template-columns: 1fr; }
 body.is-phone .cpr-row-tools > .cpr-tool:last-child { margin-left: 0; }
-@media (max-width: 600px) {
-[data-cpr-page="overview"] .cpr-block:not(.cpr-block-header, .cpr-block-stats, .cpr-block-vitals, .cpr-block-portrait, .cpr-block-mobile) { display: none !important; }
-[data-cpr-page="overview"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-header, .cpr-block-stats, .cpr-block-vitals, .cpr-block-portrait)) { display: none !important; }
-[data-cpr-page="skills"] .cpr-block:not(.cpr-block-skills, .cpr-block-mobile) { display: none !important; }
-[data-cpr-page="skills"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-skills)) { display: none !important; }
-[data-cpr-page="combat"] .cpr-block:not(.cpr-block-vitals, .cpr-block-armor, .cpr-block-weapons, .cpr-block-log, .cpr-block-mobile) { display: none !important; }
-[data-cpr-page="combat"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-vitals, .cpr-block-armor, .cpr-block-weapons, .cpr-block-log)) { display: none !important; }
-[data-cpr-page="dossier"] .cpr-block:not(.cpr-block-tabs, .cpr-block-mobile) { display: none !important; }
-[data-cpr-page="dossier"] .callout[data-callout^="cpr-"]:not(:has(.cpr-block-tabs)) { display: none !important; }
-.cpr-sheet .metadata-container,
-.cpr-sheet .inline-title,
-.cpr-sheet .markdown-preview-section > div:has(> h1) { display: none !important; }
-.markdown-preview-view.cpr-sheet,
-.markdown-source-view.cpr-sheet .cm-sizer { padding-left: 8px !important; padding-right: 8px !important; }
-.cpr-block-mobile { display: block !important; position: sticky; top: 0; z-index: 20; margin: 0 -8px 8px; }
-.cpr-sheet .callout[data-callout^="cpr-"] { margin: 8px 0 !important; }
-.cpr-sheet .callout[data-callout="cpr-panel"] > .callout-title,
-.cpr-sheet .callout[data-callout="cpr-side"] > .callout-title { min-width: 0; }
-.cpr-sheet .callout[data-callout="cpr-row"] > .callout-content > .callout { flex: 1 1 100% !important; }
-.cpr-header,
-.cpr-vitals,
-.cpr-skill-cols,
-.cpr-lifepath { grid-template-columns: 1fr !important; }
-.cpr-header .cpr-field { min-height: 40px; }
-.cpr-big { font-size: 22px !important; }
-.cpr-meta .cpr-field { flex: 1 1 45%; }
-.cpr-header-tools { width: 100%; justify-content: flex-end; }
-.cpr-stats { grid-template-columns: repeat(5, 1fr) !important; gap: 4px !important; }
-.cpr-stat { flex-direction: column !important; align-items: center !important; padding: 2px !important; min-height: 0 !important; }
-.cpr-stat .cpr-label::before { content: none; }
-.cpr-stat .cpr-value { font-size: 24px !important; align-self: center !important; }
-.cpr-luck { flex-wrap: wrap; justify-content: center; }
-.cpr-luck .cpr-of { display: none; }
-.cpr-vitals { gap: 6px !important; }
-.cpr-vital { min-height: 0 !important; flex-direction: row !important; justify-content: space-between; align-items: center; }
-.cpr-vital .cpr-value { font-size: 24px !important; }
-.cpr-portrait { min-height: 0 !important; max-height: 300px !important; }
-.cpr-portrait img { max-height: 300px !important; }
-.cpr-damage { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: 6px !important; }
-.cpr-damage input { grid-column: 1 / -1; height: 40px !important; font-size: 20px !important; width: 100% !important; }
-.cpr-damage button { height: 40px !important; font-size: 13px !important; }
-.cpr-skills th:nth-child(2),
-.cpr-skills th:nth-child(3),
-.cpr-skills td:nth-child(2),
-.cpr-skills td:nth-child(3) { display: none; }
-.cpr-skills td { padding: 6px 8px !important; font-size: 16px; }
-.cpr-skills .cpr-total { font-size: 18px; width: 3em; }
-.cpr-skill-cols { gap: 0 !important; }
-.cpr-skill-cols .cpr-skills:nth-child(2) tr:first-child { display: none; }
-.cpr-weapons,
-.cpr-weapons tbody { display: block; background: transparent !important; }
-.cpr-weapons tr:first-child { display: none; }
-.cpr-weapons tr { display: grid; grid-template-columns: 1fr auto auto; margin-bottom: 8px; background: var(--cpr-box); }
-.cpr-weapons td { border: none !important; padding: 4px 8px !important; }
-.cpr-weapons td.cpr-weapon-name { grid-column: 1 / -1; font-size: 17px; border-bottom: 2px solid var(--cpr-red) !important; }
-.cpr-weapons td.cpr-notes { grid-column: 1 / -1; color: var(--cpr-box-dim); }
-.cpr-weapons td.cpr-act { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; }
-.cpr-weapons td.cpr-act button { height: 36px !important; font-size: 13px !important; margin: 0 !important; }
-.cpr-armor td,
-.cpr-armor th { padding: 6px !important; }
-.cpr-armor .cpr-act button { height: 32px !important; min-width: 36px; }
-.cpr-tabbar { display: grid !important; grid-template-columns: repeat(3, 1fr); }
-.cpr-tab { padding: 6px 8px !important; font-size: 13px !important; clip-path: none !important; }
-.cpr-cards { grid-template-columns: 1fr !important; }
-.cpr-row-tools > .cpr-tool:last-child { margin-left: 0; }
-}
+
 
 /* phone: equal skill columns */
 body.is-phone .cpr-skills { width: 100% !important; display: block; }
 body.is-phone .cpr-skills th:last-child,
 body.is-phone .cpr-skills td:last-child { display: block; }
-@media (max-width: 600px) {
-.cpr-skills { width: 100% !important; display: block; }
-.cpr-skills th:last-child,
-.cpr-skills td:last-child { display: block; }
-}
+
 
 body.is-phone .cpr-skills tbody { display: block; }
-body.is-phone .cpr-skills tr { display: grid !important; grid-template-columns: 1fr 4.5em; }
-@media (max-width: 600px) {
-.cpr-skills tbody { display: block; }
-.cpr-skills tr { display: grid !important; grid-template-columns: 1fr 4.5em; }
-}
+body.is-phone .cpr-skills tr { display: grid; grid-template-columns: 1fr 4.5em; }
+
 
 body.is-phone .cpr-skills thead { display: block; }
 body.is-phone .cpr-skill-cols .cpr-skills:nth-child(2) tr:first-child { display: none !important; }
-@media (max-width: 600px) {
-.cpr-skills thead { display: block; }
-.cpr-skill-cols .cpr-skills:nth-child(2) tr:first-child { display: none !important; }
-}
+
