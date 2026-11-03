@@ -2569,7 +2569,13 @@ function newCharacterBody(handle) {
 
 /* ---------------- plugin ---------------- */
 module.exports = class CprSheetPlugin extends Plugin {
+  onunload() {
+    document.body.classList.remove("cpr-ui");
+  }
+
   async onload() {
+    // styles.css scopes its overrides under body.cpr-ui (instead of !important)
+    document.body.classList.add("cpr-ui");
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
     if (!Array.isArray(this.settings.homebrewRoles)) this.settings.homebrewRoles = [];
     if (!Array.isArray(this.settings.homebrewSkills)) this.settings.homebrewSkills = [];
